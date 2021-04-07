@@ -2,7 +2,6 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-
-import tn.esprit.spring.entities.Bank;
+import tn.esprit.spring.dto.BankDto;
+import tn.esprit.spring.dto.BankOffersDto;
 import tn.esprit.spring.entities.BankOffers;
 import tn.esprit.spring.service.BankService;
 
 @RestController
 @RequestMapping("/bank")
-public class BankControl {
+public class BankController {
 
 	@Autowired
 	BankService bankService;
@@ -31,7 +28,7 @@ public class BankControl {
 	
 	@GetMapping("/getAllBanks")
     @ResponseBody
-	public List<Bank> getAllEmployes() {
+	public List<BankDto> getAllEmployes() {
 		
 		return bankService.getAllBanks();
 	}
@@ -39,7 +36,7 @@ public class BankControl {
 	
 	@PostMapping("/addBank")
 	@ResponseBody
-	public Bank addBank(@RequestBody Bank  bank){
+	public BankDto addBank(@RequestBody BankDto  bank){
 	return	bankService.addBank(bank);
 		
 		
@@ -55,7 +52,7 @@ public class BankControl {
 
 	@PutMapping("/updateBank")
 	@ResponseBody 
-	public Bank updateBank(@RequestBody Bank bank){
+	public BankDto updateBank(@RequestBody BankDto bank){
 		return bankService.updateBank(bank);
 	}
 	
@@ -67,19 +64,33 @@ public class BankControl {
 	}
 	@PostMapping(path="/getALLBankByIr")
 	@ResponseBody
-	public List<Bank> getALLBankByIr( @RequestBody double interestRate) {
+	public List<BankDto> getALLBankByIr( @RequestBody double interestRate) {
 		return bankService.getALLBankByIr(interestRate);
 	}
 	
-	@PostMapping(path="/getAllOffrersByMaxCredit")
+	@PostMapping(path="/getAllOffrersByMaxCredit/{period}")
 	@ResponseBody
-	public List<BankOffers> getAllOffrersByMaxCredit( @RequestBody double amount) {
-		return bankService.getAllOffrersByMaxCredit(amount);
+	public List<BankOffersDto> getAllOffrersByMaxCredit( @RequestBody double amount,@PathVariable("period") int period) {
+		return bankService.getAllOffrersByMaxCredit(amount,period);
 	}
 	
 	@PostMapping(path="/getBankByName")
 	@ResponseBody
-	public Bank getBankByName( @RequestBody String name) {
+	public BankDto getBankByName( @RequestBody String name) {
 		return bankService.getBankByName(name);
 	}
+	
+	
+	@PostMapping(path="/getBankOffreByMax/{amount}")
+	@ResponseBody 
+	public List<BankOffersDto> getBankOffreByMax(@RequestBody String bank,@PathVariable("amount") double amount){
+		return bankService.getAllOffrersByMaxInBank(bank, amount);
+	}
+	
+	@PostMapping(path="/getBankOffreByMax")
+	@ResponseBody 
+	public List<BankOffers> getBankOffreByMax(@RequestBody Long bank){
+		return bankService.getAllOffrersByBank(bank);
+	}
+	
 }

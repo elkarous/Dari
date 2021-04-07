@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,7 +63,7 @@ public class Bank implements Serializable {
 	}
 
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="bank")
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="bank")
 	private Set<BankOffers> bankOffer;
 
 

@@ -16,8 +16,8 @@ public class UnitPrice implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "Postal_Code")
-	private int  postalCode;
+	@Column(name = "municipal")
+	private String  municipal;
 	@Column(name = "MaxUnitPrice")
 	private int maxunitprice;
 	@Column(name = "MinUnitPrice")
@@ -33,12 +33,7 @@ public class UnitPrice implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getPostalCode() {
-		return postalCode;
-	}
-	public void setPostalCode(int postalCode) {
-		this.postalCode = postalCode;
-	}
+	
 
 	public int getMaxunitprice() {
 		return maxunitprice;
@@ -56,12 +51,23 @@ public class UnitPrice implements Serializable{
 		this.minunitprice = minunitprice;
 	}
 
-	public UnitPrice(int postalCode, int maxunitprice, int minunitprice) {
+	public String getMunicipal() {
+		return municipal;
+	}
+
+	public void setMunicipal(String municipal) {
+		this.municipal = municipal;
+	}
+
+	public UnitPrice(Long id, String municipal, int maxunitprice, int minunitprice) {
 		super();
-		this.postalCode = postalCode;
+		this.id = id;
+		this.municipal = municipal;
 		this.maxunitprice = maxunitprice;
 		this.minunitprice = minunitprice;
 	}
+
+	
 	
 	
 }

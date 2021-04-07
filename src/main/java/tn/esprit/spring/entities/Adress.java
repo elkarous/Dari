@@ -25,18 +25,10 @@ public class Adress implements Serializable {
 	private Long idAdress;
 	
 	@NotNull
-	@Column(name = "Postal_Code")
-	private int  postalCode;
+	@Column(name = "municipal")
+	private String  municipal;
 	
-	public Adress(@NotNull int postalCode, @NotNull String street, @NotNull String city, @NotNull String gouvernorat,
-			Set<House> houses) {
-		super();
-		this.postalCode = postalCode;
-		this.street = street;
-		this.city = city;
-		this.gouvernorat = gouvernorat;
-		this.houses = houses;
-	}
+
 
 	@NotNull
 	@Column(name = "Street")
@@ -62,14 +54,6 @@ public class Adress implements Serializable {
 
 	
 
-	public Adress(int postalCode, String street, String city, String gouvernorat) {
-		super();
-		this.postalCode = postalCode;
-		this.street = street;
-		this.city = city;
-		this.gouvernorat = gouvernorat;
-		
-	}
 
 	public Set<House> getHouses() {
 		return houses;
@@ -108,13 +92,25 @@ public class Adress implements Serializable {
 		this.gouvernorat = gouvernorat;
 	}
 
-	public int getPostalCode() {
-		return postalCode;
+	public String getMunicipal() {
+		return municipal;
 	}
 
-	public void setPostalCode(int postalCode) {
-		this.postalCode = postalCode;
+	public void setMunicipal(String municipal) {
+		this.municipal = municipal;
 	}
+
+	public Adress(@NotNull String municipal, @NotNull String street, @NotNull String city, @NotNull String gouvernorat,
+			Set<House> houses) {
+		super();
+		this.municipal = municipal;
+		this.street = street;
+		this.city = city;
+		this.gouvernorat = gouvernorat;
+		this.houses = houses;
+	}
+
+	
 
 	
 	

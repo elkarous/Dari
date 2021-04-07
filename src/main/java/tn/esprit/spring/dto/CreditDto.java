@@ -1,19 +1,13 @@
 package tn.esprit.spring.dto;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
 
 
 
-public class CreditDto implements Serializable  {
-	private static final long serialVersionUID = 1L;
+
+
+
+public class CreditDto {
+	
 	
 	private double amount;
     private int period;
@@ -22,15 +16,13 @@ public class CreditDto implements Serializable  {
 	private Long creditId ;
     private double interestRate; 
 	
+    //Getter,Setter,Constructors
 	public double getSalary() {
 		return salary;
 	}
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-	
-    
-	
 	
 	public CreditDto(double amount, int period, double salary, double monthlyPayment, Long creditId,
 			double interestRate) {

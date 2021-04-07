@@ -20,4 +20,8 @@ public interface BankRepository extends CrudRepository<Bank, Long> {
     
     @Query("SELECT b FROM Bank b where b.interestRate<=:interestRate")
     public List<Bank> getAllBankByTaux(@Param("interestRate") double interestRate);
+    
+  
+    
+    
 }
