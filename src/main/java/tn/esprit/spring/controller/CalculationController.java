@@ -3,7 +3,6 @@ package tn.esprit.spring.controller;
 
 
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +16,37 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.dto.BankOffersDto;
 import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.dto.HouseDto;
-import tn.esprit.spring.service.CalculationService;
+import tn.esprit.spring.service.SimulationService;
 import tn.esprit.spring.service.EmailService;
+import tn.esprit.spring.service.EstimationService;
 
 
 @RestController
 @RequestMapping("/calculation")
 public class CalculationController {
 	@Autowired
-    CalculationService calculationservice ;
+    SimulationService simulationService ;
 	@Autowired
 	EmailService emailsevice;
+	@Autowired
+	EstimationService estimationService;
 	
 	//simulation of credit  by Interest Rate
 	
-	@PostMapping(path="/simulation")
+	@PostMapping(path="/simulationByIr")
 	@ResponseBody
 	public CreditDto calcule( @RequestBody CreditDto creditDto) {
 		
-		return calculationservice.CalculeCredit(creditDto);
+		return simulationService.CalculeCreditByIr(creditDto);
 		
 	}
 	
 	//simulation of credit in all bank
 	
-	@PostMapping(path="/simulationByIr")
+	@PostMapping(path="/simulationInAllBank")
 	@ResponseBody
-	public Map< Map<String, Double>,List<BankOffersDto>> calculeByIr( @RequestBody CreditDto credit) {
-		return calculationservice.CalculeCreditByIR(credit) ;
+	public  Map<String, Double> calculeByIr( @RequestBody CreditDto credit) {
+		return simulationService.CalculeCreditInAllBank(credit) ;
 		
 	}
 	
@@ -52,19 +54,28 @@ public class CalculationController {
 	
 	@PostMapping(path="/simulationbybank/{name}")
 	@ResponseBody
-	public CreditDto simulationbybank( @RequestBody CreditDto credit,@PathVariable("name") String name) {
+	public Map<Double,BankOffersDto> simulationbybank( @RequestBody CreditDto credit,@PathVariable("name") String name) {
 		
-		return calculationservice.CalculeCreditByBank(credit, name);
+		return simulationService.CalculeCreditByBank(credit, name);
 		
 	}
 	
 	//estimation of house 
 	
-	@PostMapping(path="/estimate")
+	@PostMapping(path="/estimation")
 	@ResponseBody
-	public Map<String,Float> estimate(@RequestBody HouseDto  house){
-		//emailsevice.sendSimpleMessage("elkarous.elkilani@gmail.com", "simulation", calculationservice.estimate(house).toString());
-	return	calculationservice.estimate(house);
+	public Map<String,Float> estimation(@RequestBody HouseDto  house){
+	return	estimationService.estimation(house);
+	}
+	
+	//estimation of house with send to email
+	
+	@PostMapping(path="/estimationWithMail/{email}")
+	@ResponseBody
+	public Map<String,Float> estimationWithMail(@RequestBody HouseDto  house,@PathVariable("email") String email){
+		
+	emailsevice.sendSimpleMessage(email, "simulation", estimationService.estimation(house).toString());
+	return	estimationService.estimation(house);
 	}
 	
 }

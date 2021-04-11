@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.dto.BankDto;
 import tn.esprit.spring.dto.BankOffersDto;
-import tn.esprit.spring.entities.BankOffers;
+import tn.esprit.spring.entities.Credit;
 import tn.esprit.spring.service.BankService;
 
 @RestController
@@ -68,10 +68,10 @@ public class BankController {
 		return bankService.getALLBankByIr(interestRate);
 	}
 	
-	@PostMapping(path="/getAllOffrersByMaxCredit/{period}")
+	@PostMapping(path="/getBestOffres")
 	@ResponseBody
-	public List<BankOffersDto> getAllOffrersByMaxCredit( @RequestBody double amount,@PathVariable("period") int period) {
-		return bankService.getAllOffrersByMaxCredit(amount,period);
+	public List<BankOffersDto> getAllOffrersByMaxCredit( @RequestBody Credit credit) {
+		return bankService.getAllOffrersByMaxCredit(credit.getAmount(),credit.getPeriod());
 	}
 	
 	@PostMapping(path="/getBankByName")
@@ -81,15 +81,11 @@ public class BankController {
 	}
 	
 	
-	@PostMapping(path="/getBankOffreByMax/{amount}")
-	@ResponseBody 
-	public List<BankOffersDto> getBankOffreByMax(@RequestBody String bank,@PathVariable("amount") double amount){
-		return bankService.getAllOffrersByMaxInBank(bank, amount);
-	}
+	
 	
 	@PostMapping(path="/getBankOffreByname")
 	@ResponseBody 
-	public List<BankOffers> getBankOffreByBankName(@RequestBody String bank){
+	public List<BankOffersDto> getBankOffreByBankName(@RequestBody String bank){
 		return bankService.getAllOffrersByBank(bank);
 	}
 	

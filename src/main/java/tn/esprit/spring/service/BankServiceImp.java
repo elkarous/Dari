@@ -41,7 +41,7 @@ public class BankServiceImp implements BankService {
 		Bank bank= bankRepository.getBankByName(bankdto.getName());
 		if(bank!=null)
 		{ 
-			throw  new RuntimeException("there is a Bank with this name , go to update ");
+			throw  new RuntimeException("there is a Bank with this name check the name or  go to update ");
 		}
 		 ModelMapper modelMapper = new ModelMapper();
 		bank = modelMapper.map(bankdto, Bank.class);
@@ -111,13 +111,14 @@ public class BankServiceImp implements BankService {
 		return bankdto;
 	}
 	
+
 	@Override
-	public List<BankOffersDto> getAllOffrersByMaxInBank( String name,double amount ){
-		List<BankOffersDto> bankoffresdtos = new ArrayList();
+public	List<BankOffersDto> getAllOffrersByBank( String name){
+		List<BankOffersDto> bankoffresdtos = new ArrayList<BankOffersDto>();
 		 Bank bank=bankRepository.getBankByName(name);
 		 for(BankOffers bankoffre:bank.getBankOffer()) {
 			 
-				 
+			 
 			 ModelMapper modelMapper = new ModelMapper();
 			 BankOffersDto bankoffredto = modelMapper.map(bankoffre, BankOffersDto.class);
 			 
@@ -126,10 +127,6 @@ public class BankServiceImp implements BankService {
 			
 			 }
 			return bankoffresdtos;
-	}
-	@Override
-public	List<BankOffers> getAllOffrersByBank( String name){
-		return bankRepository.getBankByName(name).getBankOffer();
 	}
 	
 }
