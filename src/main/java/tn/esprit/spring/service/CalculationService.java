@@ -14,7 +14,7 @@ import tn.esprit.spring.dto.HouseDto;
 
 public interface CalculationService {
 
-	float estimate(HouseDto house);
+	Map<String, Float> estimate(HouseDto house);
 
 	Map<Map<String, Double>, List<BankOffersDto>> CalculeCreditByIR(CreditDto credit);
 

@@ -2,7 +2,7 @@ package tn.esprit.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,16 +105,15 @@ public class BankServiceImp implements BankService {
 	@Override
 	public BankDto getBankByName(String name) {
 		Bank bank=bankRepository.getBankByName(name);
-		
 		 ModelMapper modelMapper = new ModelMapper();
-		BankDto bankdto = modelMapper.map(bank, BankDto.class);
+		BankDto  bankdto = modelMapper.map(bank, BankDto.class);
 		
 		return bankdto;
 	}
 	
 	@Override
 	public List<BankOffersDto> getAllOffrersByMaxInBank( String name,double amount ){
-		List<BankOffersDto> bankoffresdtos = new ArrayList<>();
+		List<BankOffersDto> bankoffresdtos = new ArrayList();
 		 Bank bank=bankRepository.getBankByName(name);
 		 for(BankOffers bankoffre:bank.getBankOffer()) {
 			 
@@ -129,8 +128,8 @@ public class BankServiceImp implements BankService {
 			return bankoffresdtos;
 	}
 	@Override
-public	List<BankOffers> getAllOffrersByBank( Long name){
-		return bankOffresRepository.getBankOffre(name);
+public	List<BankOffers> getAllOffrersByBank( String name){
+		return bankRepository.getBankByName(name).getBankOffer();
 	}
 	
 }

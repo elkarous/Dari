@@ -1,5 +1,6 @@
 package tn.esprit.spring.dto;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -11,10 +12,18 @@ public class BankDto {
 	private String name;
 	private String description; 
     private double interestRate;
-	private Set<BankOffersDto> bankOffer;
+	private List<BankOffersDto> bankOffer;
 	
 	//Getters,Setters,Constructors
 	
+	public List<BankOffersDto> getBankOffer() {
+		return bankOffer;
+	}
+
+	public void setBankOffer(List<BankOffersDto> bankOffer) {
+		this.bankOffer = bankOffer;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -47,15 +56,9 @@ public class BankDto {
 		this.interestRate = interestRate;
 	}
 
-	public Set<BankOffersDto> getBankOffer() {
-		return bankOffer;
-	}
+	
 
-	public void setBankOffer(Set<BankOffersDto> bankOffer) {
-		this.bankOffer = bankOffer;
-	}
-
-	public BankDto(Long id, String name, String description, double interestRate, Set<BankOffersDto> bankOffer) {
+	public BankDto(Long id, String name, String description, double interestRate, List<BankOffersDto> bankOffer) {
 		super();
 		this.id = id;
 		this.name = name;

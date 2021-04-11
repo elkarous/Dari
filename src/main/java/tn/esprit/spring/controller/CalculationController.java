@@ -34,7 +34,6 @@ public class CalculationController {
 	@PostMapping(path="/simulation")
 	@ResponseBody
 	public CreditDto calcule( @RequestBody CreditDto creditDto) {
-		// emailsevice.sendSimpleMessage("elkarous.elkilani@gmail.com", "simulation", credit.toString());
 		
 		return calculationservice.CalculeCredit(creditDto);
 		
@@ -63,7 +62,9 @@ public class CalculationController {
 	
 	@PostMapping(path="/estimate")
 	@ResponseBody
-	public float estimate(@RequestBody HouseDto  house){
+	public Map<String,Float> estimate(@RequestBody HouseDto  house){
+		//emailsevice.sendSimpleMessage("elkarous.elkilani@gmail.com", "simulation", calculationservice.estimate(house).toString());
 	return	calculationservice.estimate(house);
 	}
+	
 }

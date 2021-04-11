@@ -19,6 +19,10 @@ import javax.validation.constraints.NotNull;
 public class BankOffers implements Serializable {
 
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -55,6 +59,9 @@ public class BankOffers implements Serializable {
 
 				
 
+
+
+
 	public BankOffers() {
 		super();
 	}
@@ -81,17 +88,7 @@ public class BankOffers implements Serializable {
 		return descriptionBankOffer;
 	}
 
-	public BankOffers(@NotNull String nameBankoffer, @NotNull String descriptionBankOffer, @NotNull String gracePeriod,
-			@NotNull int selfFinancing, @NotNull double maxCredit, @Min(1) int period, Bank bank) {
-		super();
-		this.nameBankoffer = nameBankoffer;
-		this.descriptionBankOffer = descriptionBankOffer;
-		this.gracePeriod = gracePeriod;
-		this.selfFinancing = selfFinancing;
-		this.maxCredit = maxCredit;
-		this.period = period;
-		this.bank = bank;
-	}
+	
 
 	public String getGracePeriod() {
 		return gracePeriod;
@@ -135,6 +132,22 @@ public class BankOffers implements Serializable {
 	}
 
 	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+
+
+
+	public BankOffers(Long idBankOffer, @NotNull String nameBankoffer, @NotNull String descriptionBankOffer,
+			@NotNull String gracePeriod, @NotNull int selfFinancing, @NotNull double maxCredit, @Min(1) int period,
+			Bank bank) {
+		super();
+		this.idBankOffer = idBankOffer;
+		this.nameBankoffer = nameBankoffer;
+		this.descriptionBankOffer = descriptionBankOffer;
+		this.gracePeriod = gracePeriod;
+		this.selfFinancing = selfFinancing;
+		this.maxCredit = maxCredit;
+		this.period = period;
 		this.bank = bank;
 	}
 	

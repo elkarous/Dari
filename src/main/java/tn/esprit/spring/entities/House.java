@@ -188,7 +188,7 @@ public class House implements Serializable{
 
 
 		public enum KindOfGood {
-			land ,apartment,villa,studio,workshop,warehouse
+			land ,apartment,villa,workshop
 			}
 		public int getIdHouse() {
 			return IdHouse;

@@ -1,7 +1,8 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,14 +49,7 @@ public class Bank implements Serializable {
 	}
 
 
-	public Bank(@NotNull String name, @NotNull String description, @NotNull @Min(1) @Min(50) double interestRate,
-			Set<BankOffers> bankOffer) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.interestRate = interestRate;
-		this.bankOffer = bankOffer;
-	}
+
 
 
 	public void setInterestRate(double interestRate) {
@@ -63,8 +57,20 @@ public class Bank implements Serializable {
 	}
 
 
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="bank")
-	private Set<BankOffers> bankOffer;
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<BankOffers> bankOffer;
+
+
+
+
+	public List<BankOffers> getBankOffer() {
+		return bankOffer;
+	}
+
+
+	public void setBankOffer(List<BankOffers> bankOffer) {
+		this.bankOffer = bankOffer;
+	}
 
 
 	public Long getId() {
@@ -74,6 +80,13 @@ public class Bank implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 
@@ -97,28 +110,27 @@ public class Bank implements Serializable {
 	}
 
 
-	public Set<BankOffers> getBankOffer() {
-		return bankOffer;
-	}
-
-
-	public void setBankOffer(Set<BankOffers> bankOffer) {
-		this.bankOffer = bankOffer;
-	}
-
+	
 
 	public Bank() {
 		super();
 	}
 
 
-	public Bank(Long id, String name, String description, Set<BankOffers> bankOffer) {
+
+
+
+	public Bank(Long id, @NotNull String name, @NotNull String description,
+			@NotNull @Min(1) @Min(50) double interestRate, List<BankOffers> bankOffer) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.interestRate = interestRate;
 		this.bankOffer = bankOffer;
 	}
+
+
 	
 
 	

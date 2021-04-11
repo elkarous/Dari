@@ -15,7 +15,6 @@ import tn.esprit.spring.dto.BankOffersDto;
 import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.dto.HouseDto;
 import tn.esprit.spring.entities.Credit;
-import tn.esprit.spring.entities.House;
 import tn.esprit.spring.repository.CreditRepository;
 import tn.esprit.spring.repository.HouseRepository;
 import tn.esprit.spring.repository.UnitPriceRepository;
@@ -35,13 +34,15 @@ public class CalculationServiceImp implements CalculationService {
 	//estimation of house 
 	
 	@Override
-	public float estimate(HouseDto housedto) {
-		 ModelMapper modelMapper = new ModelMapper();
-		 House house = modelMapper.map(housedto, House.class);
-		return priceCalculation(house);
+	public Map<String,Float> estimate(HouseDto housedto) {
+		Map<String,Float> map=new HashMap<String,Float>();
+		map.put("minimum price:", priceCalculation(housedto,unitPriceRepository.getMinUnitPrice(housedto.getAdress().getMunicipal())));
+		map.put("maximum price:", priceCalculation(housedto,unitPriceRepository.getMaxUnitPrice(housedto.getAdress().getMunicipal())));
+
+		return map;
 	}
 	
-	//calculation of credit in all bank ?????
+	//calculation of credit in all bank 
 	
 	@Override
 	public Map< Map<String, Double>,List<BankOffersDto>> CalculeCreditByIR(CreditDto credit) {
@@ -92,29 +93,54 @@ public class CalculationServiceImp implements CalculationService {
 
 	//estimation function
 	
-	public float priceCalculation(House house){
-		float price=house.getArea()*unitPriceRepository.getUnitPrice(house.getAdress().getMunicipal());
-		if(house.getNbGarage()!=0) {
-			price+=house.getNbGarage()*0.02;
-		}
-		if(house.getNbRooms()!=0) {
-			price+=house.getNbRooms()*0.02;
-		}
-		if(house.isTerrace()) {
-			price*= 1.02;
-		}
-		if(house.isSwimmingPool()) {
-			price*= 1.04;
-		}
-		if(house.isGarden()) {
-			price*= 1.03;
-		}
-		if(house.isAscenseur()) {
-			price*= 1.04;
-		}
-		if(house.isSousSol()) {
-			price*= 1.02;
-		}
+	public float priceCalculation(HouseDto house,float unit){
+		float price=house.getArea()*unit;
+	switch(house.getKindofgood()) {
+			case apartment:
+	
+			price*= 1.5;
+			if(house.getNbRooms()!=0) {
+				price+=house.getNbRooms()*0.02;
+			}
+			if(house.isAscenseur()) {
+				price*= 1.04;
+			}
+			break;
+			case workshop:
+				price*= 1.5;
+				if(house.getNbGarage()>1) {
+					price+=house.getNbGarage()*0.02;
+				}
+					break;
+			case villa:
+			
+					price*= 1.5;
+				if(house.getNbGarage()!=0) {
+					price+=house.getNbGarage()*0.02;
+				}
+				if(house.getNbRooms()!=0) {
+					price+=house.getNbRooms()*0.02;
+				}
+				if(house.isTerrace()) {
+					price*= 1.02;
+				}
+				if(house.isSwimmingPool()) {
+					price*= 1.04;
+				}
+				if(house.isGarden()) {
+					price*= 1.03;
+				}
+				if(house.isAscenseur()) {
+					price*= 1.04;
+				}
+				if(house.isSousSol()) {
+					price*= 1.02;
+				}
+				break;
+	default:
+		break;
+	}
+
 		
 		return price;
 	}

@@ -20,6 +20,6 @@ public interface BankService {
 	BankDto getBankByName(String name);
 	BankDto updateBank(BankDto bankdto);
 	List<BankOffersDto> getAllOffrersByMaxInBank(String name,double amount);
-	List<BankOffers> getAllOffrersByBank(Long name);
+	List<BankOffers> getAllOffrersByBank(String name);
 	List<BankOffersDto> getAllOffrersByMaxCredit(double amount, int period);
 }

@@ -87,9 +87,9 @@ public class BankController {
 		return bankService.getAllOffrersByMaxInBank(bank, amount);
 	}
 	
-	@PostMapping(path="/getBankOffreByMax")
+	@PostMapping(path="/getBankOffreByname")
 	@ResponseBody 
-	public List<BankOffers> getBankOffreByMax(@RequestBody Long bank){
+	public List<BankOffers> getBankOffreByBankName(@RequestBody String bank){
 		return bankService.getAllOffrersByBank(bank);
 	}
 	
