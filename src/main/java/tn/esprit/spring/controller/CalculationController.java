@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.dto.BankOffersDto;
+
 import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.dto.HouseDto;
 import tn.esprit.spring.service.SimulationService;
@@ -50,11 +50,13 @@ public class CalculationController {
 		
 	}
 	
+	
+	
 	//simulation of credit by bank
 	
 	@PostMapping(path="/simulationbybank/{name}")
 	@ResponseBody
-	public Map<Double,BankOffersDto> simulationbybank( @RequestBody CreditDto credit,@PathVariable("name") String name) {
+	public Map<String,Double> simulationbybank( @RequestBody CreditDto credit,@PathVariable("name") String name) {
 		
 		return simulationService.CalculeCreditByBank(credit, name);
 		

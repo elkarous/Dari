@@ -3,16 +3,17 @@ package tn.esprit.spring.service;
 
 
 import java.util.HashMap;
+
 import java.util.Map;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import tn.esprit.spring.dto.BankOffersDto;
 import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.entities.Bank;
-import tn.esprit.spring.entities.Credit;
+
 import tn.esprit.spring.repository.CreditRepository;
 import tn.esprit.spring.repository.BankRepository;
 
@@ -24,7 +25,7 @@ public class SimulationServiceImp implements SimulationService {
 	@Autowired 
 	BankService banksevice;
 	@Autowired 
-   BankRepository 	BankRepository;
+   BankRepository 	bankRepository;
 	
 	
 	
@@ -33,7 +34,7 @@ public class SimulationServiceImp implements SimulationService {
 	@Override
 	public Map<String, Double> CalculeCreditInAllBank(CreditDto creditdto) {
 		 Map<String, Double>  map= new HashMap<>();
-		for(Bank bank:BankRepository.findAll()) {
+		for(Bank bank:bankRepository.findAll()) {
 			
 				map.put(bank.getName() ,CalculeCredit(creditdto.getAmount(),bank.getInterestRate(),creditdto.getPeriod()));
 			}
@@ -46,14 +47,11 @@ public class SimulationServiceImp implements SimulationService {
 	//calculation of credit by bank
 	
 	@Override
-	public Map<Double,BankOffersDto> CalculeCreditByBank(CreditDto creditdto,String bankName){
-		 Map<Double, BankOffersDto>  map= new HashMap<>();
+	public Map<String,Double> CalculeCreditByBank(CreditDto creditdto,String bankName){
+		Map<String,Double>  map= new HashMap<>();
 		for(BankOffersDto offre:banksevice.getAllOffrersByBank(bankName)) {
-			double amount=creditdto.getAmount()*((100-offre.getSelfFinancing())/100);
-			double monthlyPayment=CalculeCredit(amount,banksevice.getBankByName(bankName).getInterestRate(),creditdto.getPeriod());
-		//amount=creditdto.getAmount()*((100-offre.getSelfFinancing())/100);
-			//creditdto.setMonthlyPayment(CalculeCredit(amount,banksevice.getBankByName(bankName).getInterestRate(),creditdto.getPeriod()));
-		  map.put(monthlyPayment, offre);
+			double amount=creditdto.getAmount()-(creditdto.getAmount()*offre.getSelfFinancing()/100);
+		  map.put( offre.getNameBankoffer(),CalculeCredit(amount,banksevice.getBankByName(bankName).getInterestRate(),creditdto.getPeriod()));
 		}
 		
 		return map;
@@ -74,17 +72,6 @@ public class SimulationServiceImp implements SimulationService {
 	}
 	
 	
-	//Best choice ???
-	
-	@Override
-	public CreditDto BestChoice(CreditDto creditDto){
-		 ModelMapper modelMapper = new ModelMapper();
-		  Credit credit = modelMapper.map(creditDto, Credit.class);
-		credit.setMonthlyPayment(CalculeCredit(credit.getAmount(),credit.getInterestRate(),credit.getPeriod()));
-		CreditDto creditdt = modelMapper.map(credit, CreditDto.class);
-		return creditdt;
-		
-	}
 	
 	
 	//calculation function

@@ -9,10 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 @Table(name = "T_BANK_OFFERS")
@@ -53,8 +56,10 @@ public class BankOffers implements Serializable {
 	@Min(value=1)
 	@Column(name = "Period")
     private int period;
+
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne( cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="bank_id")
 	Bank bank;
 
 				

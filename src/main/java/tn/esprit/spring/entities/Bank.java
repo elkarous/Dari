@@ -57,7 +57,7 @@ public class Bank implements Serializable {
 	}
 
 
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<BankOffers> bankOffer;
 
 
