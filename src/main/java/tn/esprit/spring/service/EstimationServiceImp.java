@@ -3,12 +3,16 @@ package tn.esprit.spring.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.dto.HouseDto;
 
+import tn.esprit.spring.dto.HouseDto;
+import tn.esprit.spring.dto.UnitPriceDto;
+import tn.esprit.spring.entities.UnitPrice;
 import tn.esprit.spring.repository.UnitPriceRepository;
+
 @Service
 public class EstimationServiceImp implements EstimationService{
 
@@ -27,6 +31,42 @@ public class EstimationServiceImp implements EstimationService{
 			return map;
 		}
 		
+		//add unit price 
+		
+		@Override
+		public UnitPriceDto addUnitPrice(UnitPriceDto unitPriceDto) {
+			
+			 ModelMapper modelMapper = new ModelMapper();
+			 UnitPrice	unitPrice = modelMapper.map(unitPriceDto, UnitPrice.class);
+			unitPriceRepository.save(unitPrice);
+			
+			return	unitPriceDto;
+			
+		}
+		
+		 //delete unit price 
+		
+		@Override
+		public void deleteUnitPrice (Long id) {
+			UnitPrice unitPrice = unitPriceRepository.findById(id).get();
+			unitPriceRepository.delete(unitPrice);
+			
+		}
+		
+		 //update unit price 
+		
+		@Override
+		public UnitPriceDto updateUnitPrice(UnitPriceDto unitPriceDto) {
+			UnitPrice unitPrice= 	unitPriceRepository.findById(unitPriceDto.getId()).get();
+			if(unitPrice!=null)
+			{ 
+				ModelMapper modelMapper = new ModelMapper();
+				unitPrice = modelMapper.map(unitPriceDto, UnitPrice.class);
+				 unitPriceRepository.save(unitPrice);
+			}
+			 
+			return  unitPriceDto;
+		}
 		
 		
 		//estimation function

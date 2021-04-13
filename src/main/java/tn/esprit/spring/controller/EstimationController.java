@@ -1,75 +1,55 @@
 package tn.esprit.spring.controller;
 
-
-
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.dto.HouseDto;
-import tn.esprit.spring.service.SimulationService;
+import tn.esprit.spring.dto.UnitPriceDto;
 import tn.esprit.spring.service.EmailService;
 import tn.esprit.spring.service.EstimationService;
 
-
 @RestController
-@RequestMapping("/calculation")
-public class CalculationController {
-	@Autowired
-    SimulationService simulationService ;
+@RequestMapping("/estimation")
+public class EstimationController {
+
 	@Autowired
 	EmailService emailsevice;
 	@Autowired
 	EstimationService estimationService;
 	
-	//simulation of credit  by Interest Rate
+	// add unit price 
 	
-	@PostMapping(path="/simulationByIr")
+	@PostMapping("/addunitprice")
 	@ResponseBody
-	public CreditDto calcule( @RequestBody CreditDto creditDto) {
+	public UnitPriceDto addunitprice(@RequestBody UnitPriceDto  unitPriceDto){
+	return	estimationService.addUnitPrice(unitPriceDto);
 		
-		return simulationService.CalculeCreditByIr(creditDto);
 		
 	}
 	
-	//simulation of credit  by Interest Rate with save in database 
-	@PostMapping(path="/simulationByIrSave")
-	@ResponseBody
-	public CreditDto calculeWithSave( @RequestBody CreditDto creditDto) {
-		
-		return simulationService.CalculeCreditByIrSave(creditDto);
-		
-	}
-
+	//delete unit price  by id
 	
-	//simulation of credit in all bank
-	
-	@PostMapping(path="/simulationInAllBank")
-	@ResponseBody
-	public  Map<String, Double> calculeByIr( @RequestBody CreditDto credit) {
-		return simulationService.CalculeCreditInAllBank(credit) ;
-		
+	@DeleteMapping("/deleteunitprice/{id}")
+	@ResponseBody 
+	public void deleteUnitPriceByID(@PathVariable("id") Long id ){
+		estimationService.deleteUnitPrice(id);
 	}
 	
+  //update  unit price 
 	
-	
-	//simulation of credit by bank
-	
-	@PostMapping(path="/simulationbybank/{name}")
-	@ResponseBody
-	public Map<String,Double> simulationbybank( @RequestBody CreditDto credit,@PathVariable("name") String name) {
-		
-		return simulationService.CalculeCreditByBank(credit, name);
-		
+	@PutMapping("/updateunitprice")
+	@ResponseBody 
+	public UnitPriceDto updateUnPrice(@RequestBody UnitPriceDto unitPriceDto){
+		return estimationService.updateUnitPrice(unitPriceDto);
 	}
 	
 	//estimation of house 
@@ -89,5 +69,4 @@ public class CalculationController {
 	emailsevice.sendSimpleMessage(email, "simulation", estimationService.estimation(house).toString());
 	return	estimationService.estimation(house);
 	}
-	
 }
