@@ -11,25 +11,17 @@ public class CreditDto {
 	
 	private double amount;
     private int period;
-	private double  salary;
 	private double  monthlyPayment;
 	private Long creditId ;
     private double interestRate; 
 	
     //Getter,Setter,Constructors
-	public double getSalary() {
-		return salary;
-	}
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
 	
-	public CreditDto(double amount, int period, double salary, double monthlyPayment, Long creditId,
+	public CreditDto(double amount, int period, double monthlyPayment, Long creditId,
 			double interestRate) {
 		super();
 		this.amount = amount;
 		this.period = period;
-		this.salary = salary;
 		this.monthlyPayment = monthlyPayment;
 		this.creditId = creditId;
 		this.interestRate = interestRate;

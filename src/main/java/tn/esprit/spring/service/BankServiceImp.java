@@ -22,6 +22,9 @@ public class BankServiceImp implements BankService {
 	BankRepository bankRepository;
 	@Autowired 
 	BankOffersRepository bankOffresRepository;
+	
+	// get All Banks
+	
 	@Override
 	public List<BankDto> getAllBanks() {
 		
@@ -36,6 +39,8 @@ public class BankServiceImp implements BankService {
 		return bankDtos;	
 	}
 
+	// add bank 
+	
 	@Override
 	public BankDto addBank(BankDto bankdto) {
 		Bank bank= bankRepository.getBankByName(bankdto.getName());
@@ -51,13 +56,16 @@ public class BankServiceImp implements BankService {
 		
 	}
 
+	//delete bank by id
+	
 	@Override
 	public void deleteBankByID(Long bankID) {
 		Bank bank = bankRepository.findById(bankID).get();
 		bankRepository.delete(bank);
 		
 	}
-
+	 //update bank 
+	
 	@Override
 	public BankDto updateBank(BankDto bankdto) {
 		Bank bank= bankRepository.findById(bankdto.getId()).get();
@@ -70,12 +78,16 @@ public class BankServiceImp implements BankService {
 		 
 		return  bankdto;
 	}
+	
+	// get all bank by name 
 
 	@Override
 	public List<String> getAllBankByNames() {
 		
 		return bankRepository.getAllBankByNames();
 	}
+	
+	//get all offer by amount and period 
 	
 	@Override
 	public List<BankOffersDto> getAllOffrersByMaxCredit( double amount,int period ){
@@ -88,6 +100,8 @@ public class BankServiceImp implements BankService {
 		}
 		return bankoffresdtos;
 	}
+	
+	// get all bank by interest rate 
 	
 	@Override
 	public List<BankDto> getALLBankByIr(double interestRate){
@@ -102,6 +116,8 @@ public class BankServiceImp implements BankService {
 		return bankDtos;	
 		
 	}
+	// get bank class by name 
+	
 	@Override
 	public BankDto getBankByName(String name) {
 		Bank bank=bankRepository.getBankByName(name);
@@ -111,7 +127,8 @@ public class BankServiceImp implements BankService {
 		return bankdto;
 	}
 	
-
+	//get offers of bank by bank name 
+	
 	@Override
 public	List<BankOffersDto> getAllOffrersByBank( String name){
 		List<BankOffersDto> bankoffresdtos = new ArrayList<BankOffersDto>();

@@ -3,6 +3,7 @@ package tn.esprit.spring.entities;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-@Table(name = "USER")
+@Table(name = "T_USER")
 public class User implements Serializable , UserDetails {
     /**
 	 * 
@@ -24,13 +25,21 @@ public class User implements Serializable , UserDetails {
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+	@Column(name = "userId")
+    private Long userId;
+	
+	@Column(name = "username")
     private String username;
+	
+	@Column(name = "password")
     private String password;
-    public Integer getUserId() {
+	
+	//getters ,setters,functions, constructors
+	
+    public Long getUserId() {
         return userId;
     }
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
     public String getUsername() {

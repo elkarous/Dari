@@ -24,6 +24,9 @@ public interface SimulationService {
 	public CreditDto CalculeCreditByIr(CreditDto creditDto);
 
 
+	public CreditDto CalculeCreditByIrSave(CreditDto creditDto);
+
+
 	
 
 	

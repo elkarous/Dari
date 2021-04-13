@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.dto.BankOffersDto;
 import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.entities.Bank;
-
+import tn.esprit.spring.entities.Credit;
 import tn.esprit.spring.repository.CreditRepository;
 import tn.esprit.spring.repository.BankRepository;
 
@@ -71,7 +72,18 @@ public class SimulationServiceImp implements SimulationService {
 		
 	}
 	
+	// //calculation of credit  by Interest Rate and save it in database
 	
+	@Override
+	public CreditDto CalculeCreditByIrSave(CreditDto creditDto){
+	
+		creditDto.setMonthlyPayment(CalculeCredit(creditDto.getAmount(),creditDto.getInterestRate(),creditDto.getPeriod()));
+		 ModelMapper modelMapper = new ModelMapper();
+		 Credit	credit = modelMapper.map(creditDto, Credit.class);
+		 creditRepository.save(credit);
+		return creditDto;
+		
+	}
 	
 	
 	//calculation function

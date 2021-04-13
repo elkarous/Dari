@@ -43,24 +43,18 @@ public class Bank implements Serializable {
 	@Min(value =50)
 	@Column(name = "interest_rate")
     private double interestRate;
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	private List<BankOffers> bankOffer;
+	
+	//getters ,setters,constructors
 	
 	public double getInterestRate() {
 		return interestRate;
 	}
 
-
-
-
-
 	public void setInterestRate(double interestRate) {
 		this.interestRate = interestRate;
 	}
-
-
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	private List<BankOffers> bankOffer;
-
-
 
 
 	public List<BankOffers> getBankOffer() {

@@ -15,6 +15,9 @@ public class AdressDto  {
 	private String  city;
 	private String  gouvernorat;
 	private Set<HouseDto> houses;
+	
+	//getters ,setters,constructors
+	
 	public Long getIdAdress() {
 		return idAdress;
 	}

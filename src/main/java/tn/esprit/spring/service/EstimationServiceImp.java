@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.dto.HouseDto;
-import tn.esprit.spring.repository.HouseRepository;
+
 import tn.esprit.spring.repository.UnitPriceRepository;
 @Service
 public class EstimationServiceImp implements EstimationService{
 
-	@Autowired
-	HouseRepository houseRepository;
+	
 	@Autowired
 	UnitPriceRepository unitPriceRepository;
 	

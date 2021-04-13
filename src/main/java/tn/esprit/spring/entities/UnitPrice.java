@@ -23,6 +23,8 @@ public class UnitPrice implements Serializable{
 	@Column(name = "MinUnitPrice")
 	private int minunitprice;
 	
+	//getters ,setters,constructors
+	
 	public UnitPrice() {
 		super();
 	}

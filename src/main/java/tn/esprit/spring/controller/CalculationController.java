@@ -41,6 +41,16 @@ public class CalculationController {
 		
 	}
 	
+	//simulation of credit  by Interest Rate with save in database 
+	@PostMapping(path="/simulationByIrSave")
+	@ResponseBody
+	public CreditDto calculeWithSave( @RequestBody CreditDto creditDto) {
+		
+		return simulationService.CalculeCreditByIrSave(creditDto);
+		
+	}
+
+	
 	//simulation of credit in all bank
 	
 	@PostMapping(path="/simulationInAllBank")

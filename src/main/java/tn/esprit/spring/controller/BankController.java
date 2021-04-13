@@ -25,6 +25,7 @@ public class BankController {
 	@Autowired
 	BankService bankService;
 	
+	//get all banks
 	
 	@GetMapping("/getAllBanks")
     @ResponseBody
@@ -33,6 +34,7 @@ public class BankController {
 		return bankService.getAllBanks();
 	}
 	
+	// add bank 
 	
 	@PostMapping("/addBank")
 	@ResponseBody
@@ -42,6 +44,7 @@ public class BankController {
 		
 	}
 	
+	//delete bank by id
 	
 	@DeleteMapping("/deleteBank/{bankId}")
 	@ResponseBody 
@@ -49,30 +52,39 @@ public class BankController {
 		bankService.deleteBankByID(bankId);
 	}
 	
-
+  //update bank 
+	
 	@PutMapping("/updateBank")
 	@ResponseBody 
 	public BankDto updateBank(@RequestBody BankDto bank){
 		return bankService.updateBank(bank);
 	}
 	
+	// get all bank by name 
 	
 	@GetMapping("/getAllBankByNames")
 	@ResponseBody
 	public List<String> getAllBankByNames(){
 		return bankService.getAllBankByNames();
 	}
+	
+	// get all bank by interest rate 
+	
 	@PostMapping(path="/getALLBankByIr")
 	@ResponseBody
 	public List<BankDto> getALLBankByIr( @RequestBody double interestRate) {
 		return bankService.getALLBankByIr(interestRate);
 	}
 	
+	//get all offer by amount and period 
+	
 	@PostMapping(path="/getBestOffres")
 	@ResponseBody
 	public List<BankOffersDto> getAllOffrersByMaxCredit( @RequestBody Credit credit) {
 		return bankService.getAllOffrersByMaxCredit(credit.getAmount(),credit.getPeriod());
 	}
+	
+	// get bank class by name 
 	
 	@PostMapping(path="/getBankByName")
 	@ResponseBody
@@ -81,7 +93,7 @@ public class BankController {
 	}
 	
 	
-	
+	//get offers of bank by bank name 
 	
 	@PostMapping(path="/getBankOffreByname")
 	@ResponseBody 

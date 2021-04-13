@@ -2,14 +2,13 @@ package tn.esprit.spring.dto;
 
 
 
-import tn.esprit.spring.entities.Adress;
+
 
 
 public class HouseDto {
 	private int IdHouse;	
 	
-
-	 Adress adress;
+	private AdressDto adress;
 	private int area;	
 	private int nbRooms;
 	private int nbGarage;
@@ -23,12 +22,13 @@ public class HouseDto {
 	public enum KindOfGood {
 		land ,apartment,villa,studio,workshop,warehouse
 		}
-
+	//getters ,setters,constructors
+	
 	public HouseDto() {
 		super();
 	}
 
-	public HouseDto(int idHouse, Adress adress, int area, int nbRooms, int nbGarage, boolean terrace,
+	public HouseDto(int idHouse, AdressDto adress, int area, int nbRooms, int nbGarage, boolean terrace,
 			boolean swimmingPool, boolean garden, boolean sousSol, boolean ascenseur, KindOfGood kindofgood) {
 		super();
 		IdHouse = idHouse;
@@ -52,11 +52,11 @@ public class HouseDto {
 		IdHouse = idHouse;
 	}
 
-	public Adress getAdress() {
+	public AdressDto getAdress() {
 		return adress;
 	}
 
-	public void setAdress(Adress adress) {
+	public void setAdress(AdressDto adress) {
 		this.adress = adress;
 	}
 

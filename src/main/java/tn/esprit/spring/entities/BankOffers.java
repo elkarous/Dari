@@ -21,10 +21,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "T_BANK_OFFERS")
 public class BankOffers implements Serializable {
 
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -64,7 +60,7 @@ public class BankOffers implements Serializable {
 
 				
 
-
+	//getters ,setters,constructors
 
 
 	public BankOffers() {

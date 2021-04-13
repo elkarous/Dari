@@ -20,27 +20,11 @@ public class Credit implements Serializable  {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "CreditId")
 	private Long creditId ;
-	
+
 	@Min(value =1)
 	@Min(value =50)
 	@Column(name = "interest_rate")
     private double interestRate; 
-	
-	public Credit(@Min(1) @Min(50) double interestRate, @Min(1000) double amount, @Min(1) @Min(50) int period,
-			@Min(350) double salary, double monthlyPayment) {
-		super();
-		this.interestRate = interestRate;
-		this.amount = amount;
-		this.period = period;
-		this.salary = salary;
-		this.monthlyPayment = monthlyPayment;
-	}
-	public double getSalary() {
-		return salary;
-	}
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
 	@Min(value = 1000)
 	@Column(name = "amount")
     private double amount;
@@ -49,13 +33,22 @@ public class Credit implements Serializable  {
 	@Min(value =50)
 	@Column(name = "Period")
     private int period;
-	
-	@Min(value = 350)
-	@Column(name = "Salary")
-    private double  salary;
-	
+
 	@Column(name = "monthlyPayment")
     private double  monthlyPayment;
+	
+	//getters ,setters,constructors
+	
+	public Credit(@Min(1) @Min(50) double interestRate, @Min(1000) double amount, @Min(1) @Min(50) int period,
+			double monthlyPayment) {
+		super();
+		this.interestRate = interestRate;
+		this.amount = amount;
+		this.period = period;
+		this.monthlyPayment = monthlyPayment;
+	}
+
+	
 	
 	
 	public double getMonthlyPayment() {
