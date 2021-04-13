@@ -63,7 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bank/deleteBank/{id}").authenticated()
                 .antMatchers("/bank/addBank").authenticated()
                 .antMatchers("/bank/updateBank").authenticated()
-                .antMatchers("/calculation/simulationByIrSave").authenticated()
+                .antMatchers("/simulation/simulationByIrSave").authenticated()
+                .antMatchers("/estimation/addunitprice").authenticated()
+                .antMatchers("/estimation/updateunitprice").authenticated()
+                .antMatchers("/estimation/deleteunitprice/{id}").authenticated()
                 .anyRequest().permitAll();
     }
 
