@@ -145,5 +145,41 @@ public	List<BankOffersDto> getAllOffrersByBank( String name){
 			 }
 			return bankoffresdtos;
 	}
+	// add bankOffre 
+	
+		@Override
+		public BankOffersDto addBankOffre(BankOffersDto bankoffredto,Long id ) {
+			Bank bank=bankRepository.findById(id).get();
+			 ModelMapper modelMapper = new ModelMapper();
+			BankOffers bankOffre = modelMapper.map(bankoffredto, BankOffers.class);
+			bank.getBankOffer().add(bankOffre);
+			bankRepository.save(bank);
+			
+			return	bankoffredto;
+			
+		}
+
+		//delete bank by id
+		
+		@Override
+		public void deleteBankoffreByID(Long id,Long idBank) {
+			BankOffers offre=bankOffresRepository.findById(id).get();
+			Bank bank=bankRepository.findById(idBank).get();
+			bank.getBankOffer().remove(offre);
+			bankRepository.save(bank);
+			
+		}
+		 //update bank offer
+		
+		@Override
+		public BankOffersDto updateBankOffre (BankOffersDto bankoffredto) {
+			
+				ModelMapper modelMapper = new ModelMapper();
+				BankOffers bankOffre = modelMapper.map(bankoffredto, BankOffers.class);
+				bankOffresRepository.save(bankOffre);
+			
+			 
+			return  bankoffredto;
+		}
 	
 }

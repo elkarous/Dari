@@ -12,9 +12,12 @@ import tn.esprit.spring.entities.UnitPrice;
 public interface UnitPriceRepository  extends CrudRepository<UnitPrice, Long>{
 	
 	  @Query("SELECT minunitprice FROM UnitPrice where municipal=:municipal")
-	    public float getMinUnitPrice(@Param("municipal") String municipal);
+	    public Float getMinUnitPrice(@Param("municipal") String municipal);
 	  
 
 	  @Query("SELECT maxunitprice FROM UnitPrice where municipal=:municipal")
-	    public float getMaxUnitPrice(@Param("municipal") String municipal);
+	    public Float getMaxUnitPrice(@Param("municipal") String municipal);
+	  
+	  @Query("SELECT u FROM UnitPrice u where u.municipal=:municipal")
+	  public UnitPrice findByMunicipal (@Param("municipal") String municipal);
 }

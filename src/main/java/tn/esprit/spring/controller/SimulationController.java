@@ -6,6 +6,7 @@ package tn.esprit.spring.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import tn.esprit.spring.dto.CreditDto;
 import tn.esprit.spring.service.SimulationService;
 
 
+@CrossOrigin(origins = "*" )
 @RestController
 @RequestMapping("/simulation")
 public class SimulationController {

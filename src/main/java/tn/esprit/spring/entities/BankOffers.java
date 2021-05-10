@@ -2,18 +2,18 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+
 
 
 
@@ -54,9 +54,6 @@ public class BankOffers implements Serializable {
     private int period;
 
 	
-	@ManyToOne( cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="bank_id")
-	Bank bank;
 
 				
 
@@ -128,13 +125,6 @@ public class BankOffers implements Serializable {
 	}
 
 
-	public Bank getBank() {
-		return bank;
-	}
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
 
 
 
@@ -149,7 +139,7 @@ public class BankOffers implements Serializable {
 		this.selfFinancing = selfFinancing;
 		this.maxCredit = maxCredit;
 		this.period = period;
-		this.bank = bank;
+	
 	}
 	
 	

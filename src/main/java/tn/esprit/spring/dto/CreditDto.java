@@ -30,7 +30,7 @@ public class CreditDto {
 		return monthlyPayment;
 	}
 	public void setMonthlyPayment(double monthlyPayment) {
-		this.monthlyPayment = monthlyPayment;
+		this.monthlyPayment =  Math.round(monthlyPayment * 1000.0) / 1000.0;
 	}
 	public CreditDto() {
 		super();

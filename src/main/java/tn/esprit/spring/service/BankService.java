@@ -20,4 +20,7 @@ public interface BankService {
 	public BankDto updateBank(BankDto bankdto);
 	public List<BankOffersDto> getAllOffrersByBank(String name);
 	public List<BankOffersDto> getAllOffrersByMaxCredit(double amount, int period);
+	public BankOffersDto addBankOffre(BankOffersDto bankoffredto,Long id);
+	public void deleteBankoffreByID(Long id,Long idBank);
+	public BankOffersDto updateBankOffre(BankOffersDto bankoffredto);
 }

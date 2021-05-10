@@ -1,6 +1,8 @@
 package tn.esprit.spring.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.modelmapper.ModelMapper;
@@ -31,6 +33,10 @@ public class EstimationServiceImp implements EstimationService{
 			return map;
 		}
 		
+		@Override
+		public UnitPrice getUnitpriceByMunicipal( String municipale) {
+			return unitPriceRepository.findByMunicipal(municipale);
+		}
 		//add unit price 
 		
 		@Override
@@ -41,6 +47,21 @@ public class EstimationServiceImp implements EstimationService{
 			unitPriceRepository.save(unitPrice);
 			
 			return	unitPriceDto;
+			
+		}
+		//get all unitPrice
+		@Override
+		public List<UnitPriceDto> getAll() {
+			List<UnitPriceDto> unitPriceDtoList = new ArrayList<>();
+			List<UnitPrice> unitPriceList= (List<UnitPrice>) unitPriceRepository.findAll();
+			for(UnitPrice unitPrice :unitPriceList) {
+				
+			 ModelMapper modelMapper = new ModelMapper();
+			 UnitPriceDto unitPriceDto = modelMapper.map(unitPrice, UnitPriceDto.class);
+			 unitPriceDtoList.add(unitPriceDto);
+			}
+			
+			return	unitPriceDtoList;
 			
 		}
 		

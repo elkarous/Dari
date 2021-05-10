@@ -1,13 +1,13 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -43,8 +45,13 @@ public class Bank implements Serializable {
 	@Min(value =50)
 	@Column(name = "interest_rate")
     private double interestRate;
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	private List<BankOffers> bankOffer;
+	
+	 @OneToMany(
+		        cascade = CascadeType.ALL,
+		        orphanRemoval = true
+		    )
+
+	private List<BankOffers> bankOffer= new ArrayList<>();
 	
 	//getters ,setters,constructors
 	
@@ -56,7 +63,7 @@ public class Bank implements Serializable {
 		this.interestRate = interestRate;
 	}
 
-
+	@JsonManagedReference
 	public List<BankOffers> getBankOffer() {
 		return bankOffer;
 	}
