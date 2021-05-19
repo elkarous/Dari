@@ -2,6 +2,8 @@ package tn.esprit.spring.dto;
 
 import java.util.List;
 
+import tn.esprit.spring.entities.FileDB;
+
 
 
 
@@ -12,7 +14,18 @@ public class BankDto {
 	private String description; 
     private double interestRate;
 	private List<BankOffersDto> bankOffer;
-	
+	public BankDto(Long id, String name, String description, double interestRate, List<BankOffersDto> bankOffer,
+			FileDB logo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.interestRate = interestRate;
+		this.bankOffer = bankOffer;
+		this.setLogo(logo);
+	}
+
+	private FileDB logo;
 	//Getters,Setters,Constructors
 	
 	public List<BankOffersDto> getBankOffer() {
@@ -70,6 +83,15 @@ public class BankDto {
 		super();
 	
 	}
+
+	public FileDB getLogo() {
+		return logo;
+	}
+
+	public void setLogo(FileDB logo) {
+		this.logo = logo;
+	}
+
 
 
 	

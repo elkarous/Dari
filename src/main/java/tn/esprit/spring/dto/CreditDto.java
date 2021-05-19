@@ -10,17 +10,29 @@ public class CreditDto {
 	
 	
 	private double amount;
+	private double total;
     private int period;
 	private double  monthlyPayment;
 	private Long creditId ;
     private double interestRate; 
 	
     //Getter,Setter,Constructors
+    
 	
 	public CreditDto(double amount, int period, double monthlyPayment, Long creditId,
 			double interestRate) {
 		super();
 		this.amount = amount;
+		this.period = period;
+		this.monthlyPayment = monthlyPayment;
+		this.creditId = creditId;
+		this.interestRate = interestRate;
+	}
+	public CreditDto(double amount, double total, int period, double monthlyPayment, Long creditId,
+			double interestRate) {
+		super();
+		this.amount = amount;
+		this.total = total;
 		this.period = period;
 		this.monthlyPayment = monthlyPayment;
 		this.creditId = creditId;
@@ -60,5 +72,11 @@ public class CreditDto {
 	}
 	public void setPeriod(int period) {
 		this.period = period;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
 	}
 }

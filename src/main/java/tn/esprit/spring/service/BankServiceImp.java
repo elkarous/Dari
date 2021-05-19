@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.esprit.spring.dto.BankDto;
 import tn.esprit.spring.dto.BankOffersDto;
@@ -14,6 +16,7 @@ import tn.esprit.spring.entities.Bank;
 import tn.esprit.spring.entities.BankOffers;
 import tn.esprit.spring.repository.BankOffersRepository;
 import tn.esprit.spring.repository.BankRepository;
+import tn.esprit.spring.repository.FileDBRepository;
 
 @Service
 public class BankServiceImp implements BankService {
@@ -22,6 +25,8 @@ public class BankServiceImp implements BankService {
 	BankRepository bankRepository;
 	@Autowired 
 	BankOffersRepository bankOffresRepository;
+	  @Autowired
+  private FileStorageService fileDBService;
 	
 	// get All Banks
 	
@@ -42,7 +47,7 @@ public class BankServiceImp implements BankService {
 	// add bank 
 	
 	@Override
-	public BankDto addBank(BankDto bankdto) {
+	public BankDto addBank(BankDto bankdto)  {
 		Bank bank= bankRepository.getBankByName(bankdto.getName());
 		if(bank!=null)
 		{ 
@@ -50,8 +55,8 @@ public class BankServiceImp implements BankService {
 		}
 		 ModelMapper modelMapper = new ModelMapper();
 		bank = modelMapper.map(bankdto, Bank.class);
-		bankRepository.save(bank);
 		
+		bankRepository.save(bank);
 		return	bankdto;
 		
 	}

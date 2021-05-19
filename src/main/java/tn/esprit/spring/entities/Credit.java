@@ -36,8 +36,11 @@ public class Credit implements Serializable  {
 
 	@Column(name = "monthlyPayment")
     private double  monthlyPayment;
+	@Column(name = "total")
+	private double total;
 	
 	//getters ,setters,constructors
+	
 	
 	public Credit(@Min(1) @Min(50) double interestRate, @Min(1000) double amount, @Min(1) @Min(50) int period,
 			double monthlyPayment) {
@@ -51,6 +54,34 @@ public class Credit implements Serializable  {
 	
 	
 	
+	public Credit(Long creditId, @Min(1) @Min(50) double interestRate, @Min(1000) double amount,
+			@Min(1) @Min(50) int period, double monthlyPayment, double total) {
+		super();
+		this.creditId = creditId;
+		this.interestRate = interestRate;
+		this.amount = amount;
+		this.period = period;
+		this.monthlyPayment = monthlyPayment;
+		this.total = total;
+	}
+
+
+
+
+	public double getTotal() {
+		return total;
+	}
+
+
+
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+
+
+
 	public double getMonthlyPayment() {
 		return monthlyPayment;
 	}

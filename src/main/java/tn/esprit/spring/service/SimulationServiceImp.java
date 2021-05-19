@@ -67,7 +67,8 @@ public class SimulationServiceImp implements SimulationService {
 	public CreditDto CalculeCreditByIr(CreditDto creditDto){
 	
 		creditDto.setMonthlyPayment(CalculeCredit(creditDto.getAmount(),creditDto.getInterestRate(),creditDto.getPeriod()));
-		
+		double total= creditDto.getAmount()+(creditDto.getAmount()*creditDto.getInterestRate()/100);
+		creditDto.setTotal(total);
 		return creditDto;
 		
 	}

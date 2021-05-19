@@ -11,7 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -40,6 +42,36 @@ public class Bank implements Serializable {
 	private String description; 
 	
 	
+	
+	@OneToOne
+ @JoinColumn(name="logo")
+	private FileDB logo; 
+	
+	public FileDB getLogo() {
+		return logo;
+	}
+
+	public void setLogo(FileDB logo) {
+		this.logo = logo;
+	}
+
+	public Bank(Long id, @NotNull String name, @NotNull String description, FileDB logo,
+			@NotNull @Min(1) @Min(50) double interestRate, List<BankOffers> bankOffer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.logo = logo;
+		this.interestRate = interestRate;
+		this.bankOffer = bankOffer;
+	}
+
+
+
+
+
+
+
 	@NotNull
 	@Min(value =1)
 	@Min(value =50)
